@@ -1,5 +1,5 @@
 
-data <- read.table(file      = "data.csv",
+data <- read.table(file      = "data1.csv",
                    header    = TRUE,
                    sep       = ";",
                    row.names = 1)
@@ -106,7 +106,9 @@ View(get_stat(data$`Удовлетворенность заказчика`))
 ###############################
 #  Графический анализ данных  #
 ###############################
-library(ggpubr)
+
+plot(data$Стаж, data$`Количество ошибок`, xlab="Стаж", ylab="Количество ошибок")
+
 
 pairs(~data$Группа                  +
        data$Пол                     +
@@ -134,12 +136,40 @@ pie(table(data$`Удовлетворенность заказчика`),
     main = "Удовлетворенность заказчика")
 
 
-pie(table(juniors$`Удовлетворенность заказчика`),
+pie(table(subset(juniors, juniors$Пол == 1)$`Удовлетворенность заказчика`),
     labels = c("Низкая", "Среднаяя", "Высокая"),
     radius = 1,
-    main = "Удовлетворенность заказчика Juniors")
-pie(table(seniors$`Удовлетворенность заказчика`),
+    main = "Удовлетворенность заказчика мужчинами Juniors")
+
+pie(table(subset(seniors, seniors$Пол == 1)$`Удовлетворенность заказчика`),
     labels = c("Низкая", "Среднаяя", "Высокая"),
     radius = 1,
-    main = "Удовлетворенность заказчика Seniors")
+    main = "Удовлетворенность заказчика мужчинами Seniors")
+
+pie(table(subset(juniors, juniors$Пол == 2)$`Удовлетворенность заказчика`),
+    labels = c("Низкая", "Среднаяя", "Высокая"),
+    radius = 1,
+    main = "Удовлетворенность заказчика женщинами Juniors")
+
+pie(table(subset(seniors, seniors$Пол == 2)$`Удовлетворенность заказчика`),
+    labels = c("Низкая", "Среднаяя", "Высокая"),
+    radius = 1,
+    main = "Удовлетворенность заказчика женщинами Seniors")
+
+
+boxplot(subset(juniors, juniors$Пол == 1, select = "Оценка заказчика"),
+        main="Диаграмма размаха для мужчин juniors",
+        ylab="Оценка заказчика")
+
+boxplot(subset(seniors, seniors$Пол == 1, select = "Оценка заказчика"),
+        main="Диаграмма размаха для мужчин seniors",
+        ylab="Оценка заказчика")
+
+boxplot(subset(juniors, juniors$Пол == 2, select = "Оценка заказчика"),
+        main="Диаграмма размаха для женщин juniors",
+        ylab="Оценка заказчика")
+
+boxplot(subset(seniors, seniors$Пол == 2, select = "Оценка заказчика"),
+        main="Диаграмма размаха для женщин seniors",
+        ylab="Оценка заказчика")
 
