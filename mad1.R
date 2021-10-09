@@ -1,5 +1,4 @@
-
-data <- read.table(file      = "data1.csv",
+data <- read.table(file      = "data.csv",
                    header    = TRUE,
                    sep       = ";",
                    row.names = 1)
@@ -14,13 +13,13 @@ names(data) <- c("Группа",
                  "Удовлетворенность заказчика",
                  "Качество документации")
 
-index <- data$`Удовлетворенность заказчика` == "низкая"
-data[index, "Удовлетворенность заказчика"] <- as.numeric(1)
-index <- data$`Удовлетворенность заказчика` == "средняя"
-data[index, "Удовлетворенность заказчика"] <- as.numeric(2)
-index <- data$`Удовлетворенность заказчика` == "высокая"
-data[index, "Удовлетворенность заказчика"] <- as.numeric(3)
-data[, "Удовлетворенность заказчика"] <- as.numeric(data[, "Удовлетворенность заказчика"])
+#index <- data$`Удовлетворенность заказчика` == "низкая"
+#data[index, "Удовлетворенность заказчика"] <- as.numeric(1)
+#index <- data$`Удовлетворенность заказчика` == "средняя"
+#data[index, "Удовлетворенность заказчика"] <- as.numeric(2)
+#index <- data$`Удовлетворенность заказчика` == "высокая"
+#data[index, "Удовлетворенность заказчика"] <- as.numeric(3)
+#data[, "Удовлетворенность заказчика"] <- as.numeric(data[, "Удовлетворенность заказчика"])
 
 juniors <- subset(data, data$Группа == 1)
 seniors <- subset(data, data$Группа == 2)
@@ -96,9 +95,9 @@ View(get_stat(data$`Качество документации`))
 ################################
 #  Анализ качественных данных  #
 ################################
-View(get_stat(juniors$`Удовлетворенность заказчика`))
-View(get_stat(seniors$`Удовлетворенность заказчика`))
-View(get_stat(data$`Удовлетворенность заказчика`))
+#View(get_stat(juniors$`Удовлетворенность заказчика`))
+#View(get_stat(seniors$`Удовлетворенность заказчика`))
+#View(get_stat(data$`Удовлетворенность заказчика`))
 
 
 
@@ -173,3 +172,11 @@ boxplot(subset(seniors, seniors$Пол == 2, select = "Оценка заказч
         main="Диаграмма размаха для женщин seniors",
         ylab="Оценка заказчика")
 
+par(mfrow = c(5, 2))
+barplot(table(data$`Пол`), main = "Пол")
+barplot(table(data$`Возраст`), main = "Возраст")
+barplot(table(data$`Стаж`), main = "Стаж")
+barplot(table(data$`Процент успеха`), main = "Процент успеха")
+barplot(table(data$`Количество ошибок`), main = "Количество ошибок")
+barplot(table(data$`Оценка заказчика`), main = "Оценка заказчика")
+barplot(table(data$`Качество документации`), main = "Качество документации")
