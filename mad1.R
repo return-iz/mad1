@@ -172,7 +172,7 @@ boxplot(subset(seniors, seniors$Пол == 2, select = "Оценка заказч
         main="Диаграмма размаха для женщин seniors",
         ylab="Оценка заказчика")
 
-par(mfrow = c(5, 2))
+par(mfrow = c(4, 2))
 barplot(table(data$`Пол`), main = "Пол")
 barplot(table(data$`Возраст`), main = "Возраст")
 barplot(table(data$`Стаж`), main = "Стаж")
