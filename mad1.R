@@ -180,3 +180,88 @@ barplot(table(data$`Процент успеха`), main = "Процент усп
 barplot(table(data$`Количество ошибок`), main = "Количество ошибок")
 barplot(table(data$`Оценка заказчика`), main = "Оценка заказчика")
 barplot(table(data$`Качество документации`), main = "Качество документации")
+
+
+
+
+
+
+
+#################################
+#  Кореляционный анализ данных  #
+#################################
+MJ <- juniors[, unlist(lapply(juniors, is.numeric))][, seq(2,8)]
+MS <- seniors[, unlist(lapply(seniors, is.numeric))][, seq(2,8)]
+
+JP <- cor(MJ, use = "all.obs")
+JS <- cor(MJ, use = "all.obs", method = "spearman")
+JK <- cor(MJ, use = "all.obs", method = "kendall")
+
+SP <- cor(MS, use = "all.obs")
+SS <- cor(MS, use = "all.obs", method = "spearman")
+SK <- cor(MS, use = "all.obs", method = "kendall")
+
+library(ggm)
+pcor(c("Количество ошибок", "Оценка заказчика", 
+       "Пол", "Возраст", "Стаж", "Процент успеха", "Качество документации"),
+     cov(MJ))
+pcor(c("Количество ошибок", "Оценка заказчика", 
+       "Пол", "Возраст", "Стаж", "Процент успеха", "Качество документации"), 
+     cov(MS))
+
+library(corrplot)
+corrplot(JP, 
+         method     = "color", 
+         type        = "upper", 
+         outline     = TRUE, 
+         order       = "hclust", 
+         tl.srt      = 45,
+         tl.col      = "black",
+         addCoef.col = "black", 
+         diag        = FALSE)
+corrplot(JS, 
+         method     = "color", 
+         type        = "upper", 
+         outline     = TRUE, 
+         order       = "hclust", 
+         tl.srt      = 45,
+         tl.col      = "black",
+         addCoef.col = "black", 
+         diag        = FALSE)
+corrplot(JK, 
+         method     = "color", 
+         type        = "upper", 
+         outline     = TRUE, 
+         order       = "hclust", 
+         tl.srt      = 45,
+         tl.col      = "black",
+         addCoef.col = "black", 
+         diag        = FALSE)
+
+corrplot(SP, 
+         method     = "color", 
+         type        = "upper", 
+         outline     = TRUE, 
+         order       = "hclust", 
+         tl.srt      = 45,
+         tl.col      = "black",
+         addCoef.col = "black", 
+         diag        = FALSE)
+corrplot(SS, 
+         method     = "color", 
+         type        = "upper", 
+         outline     = TRUE, 
+         order       = "hclust", 
+         tl.srt      = 45,
+         tl.col      = "black",
+         addCoef.col = "black", 
+         diag        = FALSE)
+corrplot(SK, 
+         method     = "color", 
+         type        = "upper", 
+         outline     = TRUE, 
+         order       = "hclust", 
+         tl.srt      = 45,
+         tl.col      = "black",
+         addCoef.col = "black", 
+         diag        = FALSE)
